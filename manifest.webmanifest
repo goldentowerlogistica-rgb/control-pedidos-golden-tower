@@ -1,0 +1,9 @@
+{
+  "name": "Control de Pedidos - Golden Tower",
+  "short_name": "Control Pedidos",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f6f9",
+  "theme_color": "#172033",
+  "lang": "es"
+}

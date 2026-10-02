@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#172033">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Control de Pedidos</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:#f4f6f9;color:#172033}
+header{background:#172033;color:#fff;padding:22px 18px;text-align:center}
+h1{margin:0;font-size:24px} header p{margin:6px 0 0;color:#d9dee8}
+nav{display:flex;background:#fff;box-shadow:0 2px 8px #0001;position:sticky;top:0;z-index:2}
+nav button{flex:1;border:0;background:#fff;padding:14px;font-weight:700;font-size:14px}
+nav button.active{background:#172033;color:#fff}
+main{max-width:1100px;margin:auto;padding:16px}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{background:#fff;border-radius:16px;padding:18px;box-shadow:0 3px 12px #0001}
+.card .n{font-size:30px;font-weight:800;margin-top:5px}
+.red{border-left:6px solid #ef4444} .blue{border-left:6px solid #3b82f6}
+.yellow{border-left:6px solid #eab308} .green{border-left:6px solid #22c55e}
+.panel{background:#fff;border-radius:16px;padding:18px;margin-top:16px;box-shadow:0 3px 12px #0001}
+iframe{width:100%;height:calc(100vh - 150px);min-height:650px;border:0;border-radius:12px}
+.small{font-size:13px;color:#667085}
+@media(min-width:700px){.cards{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<header><h1>CONTROL DE PEDIDOS</h1><p>Golden Tower · Desde GTL-1170</p></header>
+<nav>
+<button id="dashBtn" class="active" onclick="show('dash')">📊 DASHBOARD</button>
+<button id="appBtn" onclick="show('app')">📦 PEDIDOS</button>
+</nav>
+<main>
+<section id="dash">
+<div class="cards">
+<div class="card"><div>📦 Total de pedidos</div><div class="n" id="total">—</div></div>
+<div class="card red"><div>🔴 Urgentes</div><div class="n" id="urgent">—</div></div>
+<div class="card blue"><div>🔵 Normales</div><div class="n" id="normal">—</div></div>
+<div class="card yellow"><div>💰 Pagos pendientes</div><div class="n" id="pending">—</div></div>
+<div class="card yellow"><div>🟡 Pagos en proceso</div><div class="n" id="process">—</div></div>
+<div class="card green"><div>🟢 Pagos completados</div><div class="n" id="paid">—</div></div>
+</div>
+<div class="panel">
+<h2>Seguimiento</h2>
+<p class="small">El botón PEDIDOS abre el sistema actual de control. El Dashboard queda preparado como portada instalable.</p>
+</div>
+</section>
+<section id="app" style="display:none">
+<div class="panel"><iframe src="https://script.google.com/macros/s/AKfycbyocmrgJtgUcvLTNKUCfhy0NWHTgP6HnKSTuTp9yS34hkzNAz6fVlOb4vZ4Mn1P0Mo/exec" title="Control de pedidos"></iframe></div>
+</section>
+</main>
+<script>
+function show(which){
+ document.getElementById('dash').style.display=which==='dash'?'block':'none';
+ document.getElementById('app').style.display=which==='app'?'block':'none';
+ document.getElementById('dashBtn').classList.toggle('active',which==='dash');
+ document.getElementById('appBtn').classList.toggle('active',which==='app');
+}
+if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body>
+</html>
