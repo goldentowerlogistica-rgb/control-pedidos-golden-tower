@@ -1,7 +1,7 @@
 {
   "id": "./",
-  "name": "Control de Pedidos — Golden Tower",
-  "short_name": "Golden Tower",
+  "name": "GT-LOGISTICA",
+  "short_name": "GT-LOGISTICA",
   "description": "Control de requerimientos y dashboard de logística de Golden Tower",
   "lang": "es-PE",
   "start_url": "./",
