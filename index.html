@@ -5,12 +5,34 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#172033">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <title>Control de Pedidos — Golden Tower</title>
 <style>html,body{margin:0;width:100%;height:100%;background:#f4f6f9;font-family:Arial,sans-serif}iframe{display:block;width:100%;height:calc(100% - 42px);border:0}footer{height:42px;display:flex;align-items:center;justify-content:center;background:#172033}a{color:white;font-size:13px}</style>
 </head>
 <body>
 <iframe src="https://script.google.com/macros/s/AKfycbyocmrgJtgUcvLTNKUCfhy0NWHTgP6HnKSTuTp9yS34hkzNAz6fVlOb4vZ4Mn1P0Mo/exec" title="Pedidos y dashboard de Golden Tower"></iframe>
-<footer><a href="https://script.google.com/macros/s/AKfycbyocmrgJtgUcvLTNKUCfhy0NWHTgP6HnKSTuTp9yS34hkzNAz6fVlOb4vZ4Mn1P0Mo/exec" target="_blank" rel="noopener">Abrir sistema en otra ventana</a></footer>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').then(function(reg){reg.update();}).catch(function(){});}</script>
+<footer><button id="instalar" hidden style="margin-right:15px;padding:7px;border:0;border-radius:6px;background:#d5ad49;color:#172033;font-weight:bold">Instalar app</button><a href="https://script.google.com/macros/s/AKfycbyocmrgJtgUcvLTNKUCfhy0NWHTgP6HnKSTuTp9yS34hkzNAz6fVlOb4vZ4Mn1P0Mo/exec" target="_blank" rel="noopener">Abrir sistema en otra ventana</a></footer>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').then(function(reg){reg.update();}).catch(function(){});}
+let solicitudInstalacion = null;
+const botonInstalar = document.getElementById('instalar');
+window.addEventListener('beforeinstallprompt', function(evento) {
+  evento.preventDefault();
+  solicitudInstalacion = evento;
+  botonInstalar.hidden = false;
+});
+botonInstalar.addEventListener('click', async function() {
+  if (!solicitudInstalacion) return;
+  const solicitud = solicitudInstalacion;
+  solicitudInstalacion = null;
+  botonInstalar.hidden = true;
+  await solicitud.prompt();
+  await solicitud.userChoice;
+});
+window.addEventListener('appinstalled', function() {
+  botonInstalar.hidden = true;
+  solicitudInstalacion = null;
+});
+</script>
 </body>
 </html>
